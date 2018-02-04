@@ -7,7 +7,7 @@ using Discord.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using System.IO;
-
+using HeyListen.Controllers.Admin;
 
 namespace HeyListen
 {
@@ -23,13 +23,8 @@ namespace HeyListen
 
         public async Task MainAsync()
         {
-            // load config
-            var builder = new ConfigurationBuilder()
-             .SetBasePath(Directory.GetCurrentDirectory())
-             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-
-            IConfiguration configuration = builder.Build();
+            IConfiguration configuration = LoadConfig.Load();
 
             // setup destiny client
             //var destinyClient = new servitor.DestinyClient.Client(configuration);
@@ -45,6 +40,8 @@ namespace HeyListen
             _services = new ServiceCollection()
                 .AddSingleton(_client)
                 .AddSingleton(_commands)
+                .AddSingleton(new DataBase())
+                .AddSingleton(new AdminOrchestrator(configuration["spotifySecret"]))
                 .BuildServiceProvider();
 
             //.AddSingleton(destinyApi)

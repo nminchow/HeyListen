@@ -13,9 +13,9 @@ namespace HeyListen.Views.Admin
         {
             var embed = new EmbedBuilder();
             embed.Title = "It looks like you have requested or been assigned DJ access. To get rolling, please follow the link below to authorize 'HeyListen!':";
-            var permissions = HttpUtility.UrlPathEncode("playlist-modify-public user-read-playback-state");
-            var url = HttpUtility.UrlPathEncode("http://xjx.in");
-            embed.Description = $"[spotify](https://accounts.spotify.com/authorize?client_id=2c2de92637fb4ebf88074f4e473db04d&response_type=token&scope={permissions}&redirect_uri={url})";
+            var permissions = HttpUtility.UrlPathEncode("playlist-modify-public user-read-playback-state user-modify-playback-state");
+            var url = HttpUtility.UrlPathEncode("https://nminchow.github.io/HeyListenWeb/");
+            embed.Description = $"[spotify](https://accounts.spotify.com/authorize?client_id=2c2de92637fb4ebf88074f4e473db04d&response_type=code&scope={permissions}&redirect_uri={url})";
             return embed;
         }
     }
