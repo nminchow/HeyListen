@@ -37,6 +37,7 @@ namespace HeyListen.Modules
         }
 
         [Command("pause", RunMode = RunMode.Async)]
+        [CurrentlyDisabled]
         public async Task PauseAsync()
         {
             await Call(Pause.PerformAsync);

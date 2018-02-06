@@ -11,11 +11,15 @@ namespace HeyListen.Controllers.Admin
         {
             var dbUser = FindOrCreateUser.Perform(user, db);
 
-            var spotify = SpotifyAuth.Perform(dbUser, db, config);
+            var spotify = await SpotifyAuth.PerformAsync(dbUser, db, config, channel);
              
             var userId = spotify.GetPrivateProfile().Id;
 
             var playlist = spotify.CreatePlaylist(userId, "HeyListen!", true);
+            if (playlist.HasError())
+            {
+                return;
+            }
             dbUser.Playlist = playlist.Id;
             db.SaveChanges();
             spotify.AddPlaylistTrack(userId, playlist.Id, "spotify:track:0ldPfYO58u8zo9Mmj03z8n");

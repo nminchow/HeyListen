@@ -24,6 +24,7 @@ namespace HeyListen.Modules
        
         [Command("dj", RunMode = RunMode.Async)]
         [Summary("Set DJ Access")]
+        [RequireUserPermission(ChannelPermission.ManageChannel)]
         public async Task SetDjAsync([Summary("Set the dj")] SocketUser user = null)
         {
             var u = user ?? Context.Message.Author;
@@ -45,10 +46,16 @@ namespace HeyListen.Modules
             await Controllers.Admin.SetToken.PerformAsync(Context.Message.Author, token, _database, _adminOrchestator);
         }
 
-        [Command("playback", RunMode = RunMode.Async)]
+        [Command("allow playback", RunMode = RunMode.Async)]
         public async Task AllowPlayback(bool allow)
         {
             await Controllers.Admin.AllowPlayback.PerformAsync(Context.Message.Author, allow, _database);
+        }
+
+        [Command("allow playlist", RunMode = RunMode.Async)]
+        public async Task AllowPlaylist(bool allow)
+        {
+            await Controllers.Admin.AllowPlaylist.PerformAsync(Context.Message.Author, allow, _database);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace HeyListen.Controllers.Playlist
     {
         public static async Task PerformAsync(ISocketMessageChannel channel, SpotifyWebAPI spotify, User dj, string query)
         {
+            var profile = spotify.GetPrivateProfile();
             var userId = spotify.GetPrivateProfile().Id;
 
             var search_result = spotify.SearchItems(query, SpotifyAPI.Web.Enums.SearchType.Track, limit: 5)?.Tracks;

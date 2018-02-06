@@ -16,7 +16,7 @@ namespace HeyListen.Controllers.Playlist
         {
             var dbChannel = db.Channels.Include(c => c.CurrentDj).FirstOrDefault(c => c.DiscordId == channel.Id.ToString());
 
-            var spotify = SpotifyAuth.Perform(dbChannel.CurrentDj, db, config);
+            var spotify = await SpotifyAuth.PerformAsync(dbChannel.CurrentDj, db, config, channel);
 
             await task(channel, spotify, dbChannel.CurrentDj, query);
         }

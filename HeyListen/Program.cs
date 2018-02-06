@@ -32,6 +32,7 @@ namespace HeyListen
 
             _client = new DiscordSocketClient();
             _client.Log += Log;
+            _client.JoinedGuild += Controllers.Helpers.JoinedGuild.AnnoiceJoinChannel;
 
             _commands = new CommandService();
 
@@ -40,7 +41,7 @@ namespace HeyListen
             _services = new ServiceCollection()
                 .AddSingleton(_client)
                 .AddSingleton(_commands)
-                .AddSingleton(new DataBase())
+                .AddSingleton(new DataBase(configuration.GetConnectionString("sql")))
                 .AddSingleton(new AdminOrchestrator(configuration["spotifySecret"]))
                 .BuildServiceProvider();
 

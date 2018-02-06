@@ -8,10 +8,16 @@ namespace HeyListen
         public DbSet<Models.User> Users { get; set; }
         public DbSet<Models.Channel> Channels { get; set; }
 
+        private string _connection;
+
+        public DataBase(string connection) : base()
+        {
+            _connection = connection;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=HeyListen;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer($@"{_connection}");
         }
     }
 }

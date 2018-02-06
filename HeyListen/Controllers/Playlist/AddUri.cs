@@ -22,7 +22,8 @@ namespace HeyListen.Controllers.Playlist
             //if (current.Context.Uri.Split(':').Last() != dj.Playlist)
             //    spotify.ResumePlayback(contextUri: dj.Playlist);
 
-            await channel.SendMessageAsync(text: $"Track Added: {track.Name}");
+            if (!track.HasError())
+                await channel.SendMessageAsync(text: $"Track Added: {track.Name}");
         }
     }
 }

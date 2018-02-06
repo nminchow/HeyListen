@@ -11,7 +11,7 @@ namespace HeyListen.Controllers.Admin
     {
         public static async System.Threading.Tasks.Task PerformAsync(Discord.WebSocket.SocketUser user, string token, DataBase db, AdminOrchestrator config)
         {
-            Token t = new AutorizationCodeAuth() { ClientId = "2c2de92637fb4ebf88074f4e473db04d", RedirectUri = "https://nminchow.github.io/HeyListenWeb/" }.ExchangeAuthCode(token, config.secret);
+            Token t = new AutorizationCodeAuth() { ClientId = "2c2de92637fb4ebf88074f4e473db04d", RedirectUri = "https://nminchow.github.io/HeyListenWeb/getToken.html" }.ExchangeAuthCode(token, config.secret);
             
 
             var dbUser = Helpers.FindOrCreateUser.Perform(user, db);

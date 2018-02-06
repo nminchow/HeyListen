@@ -14,7 +14,8 @@ namespace HeyListen.Preconditions
         public async override Task<PreconditionResult> CheckPermissions(ICommandContext context, CommandInfo command, IServiceProvider services)
         {
             // possible to pass the context in?
-            var currentDj = new DataBase().Channels.Include(c => c.CurrentDj).FirstOrDefault(c => c.DiscordId == context.Channel.Id.ToString())?.CurrentDj;
+            var db = (DataBase)services.GetService(typeof(DataBase));
+            var currentDj = db.Channels.Include(c => c.CurrentDj).FirstOrDefault(c => c.DiscordId == context.Channel.Id.ToString())?.CurrentDj;
             if (currentDj.DiscordId == context.Message.Author.Id.ToString())
                 return PreconditionResult.FromSuccess();
             
