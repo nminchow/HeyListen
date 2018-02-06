@@ -14,6 +14,7 @@ namespace HeyListen.Modules
 {
     [Group("hey")]
     [RequirePlaylistControl]
+    [RequirePlaylistSet]
     public class Playlist : ModuleBase<SocketCommandContext>
     {
         private DataBase _database;
