@@ -8,7 +8,6 @@ namespace HeyListen.Controllers.Admin
     {
         public static async System.Threading.Tasks.Task PerformAsync(SocketUser user, ISocketMessageChannel channel, DataBase db)
         {
-            // check admin permission here
             
             var dbChannel = db.Channels.FirstOrDefault(c => c.DiscordId == channel.Id.ToString());
             if (dbChannel == null)

@@ -19,5 +19,24 @@ namespace HeyListen.Controllers.Playback
 
             await task(channel, spotify);
         }
+
+        public static async Task MessageBeforeAfter(ISocketMessageChannel channel, SpotifyWebAPI spotify, Action<ISocketMessageChannel, SpotifyWebAPI> action)
+        {
+            var playing = spotify.GetPlayingTrack();
+            if (playing.HasError() || string.IsNullOrEmpty(playing.Item?.Name))
+            {
+                await channel.SendMessageAsync(Views.Error.SkipError.Response());
+                return;
+            }
+            await channel.SendMessageAsync("Skipping:", embed: Views.Spotify.Track.Response(playing.Item));
+            action(channel, spotify);
+            var newTrack = spotify.GetPlayingTrack();
+            if (newTrack.HasError() || string.IsNullOrEmpty(newTrack.Item?.Name))
+            {
+                await channel.SendMessageAsync(Views.Error.SkipError.Response());
+                return;
+            }
+            await channel.SendMessageAsync("Now Playing:", embed: Views.Spotify.Track.Response(newTrack.Item));
+        }
     }
 }

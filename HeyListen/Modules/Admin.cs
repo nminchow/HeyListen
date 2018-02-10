@@ -31,6 +31,14 @@ namespace HeyListen.Modules
             await SetDj.PerformAsync(u, Context.Channel, _database);
         }
 
+        [Command("clear", RunMode = RunMode.Async)]
+        [Summary("Clear DJ")]
+        [RequireUserPermission(ChannelPermission.ManageChannel)]
+        public async Task ClearDjAsync([Summary("Clear the dj")] SocketUser user = null)
+        {
+            await ClearDj.PerformAsync(Context.Channel, _database);
+        }
+
         [Command("playlist")]
         [Summary("Switch to playlist mode")]
         [RequireDj]

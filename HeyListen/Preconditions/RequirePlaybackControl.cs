@@ -11,14 +11,8 @@ namespace HeyListen.Preconditions
 {
     public class RequirePlaybackControl : PreconditionAttribute
     {
-        //private readonly DataBase _database;
-        //public RequirePlaybackControl(DataBase database)
-        //{
-        //    _database = database;
-        //}
         public async override Task<PreconditionResult> CheckPermissions(ICommandContext context, CommandInfo command, IServiceProvider services)
         {
-            // possible to pass the context in?
             var db = (DataBase)services.GetService(typeof(DataBase));
             var dbUser = db.Channels.Include(c => c.CurrentDj).FirstOrDefault(c => c.DiscordId == context.Channel.Id.ToString())?.CurrentDj;
             if (dbUser == null)

@@ -22,6 +22,7 @@ namespace HeyListen.Modules
         public Playback(DataBase database, AdminOrchestrator admin)
         {
             _database = database;
+            _adminOrchestator = admin;
         }
 
         [Command("skip", RunMode = RunMode.Async)]
@@ -46,7 +47,7 @@ namespace HeyListen.Modules
         [Command("back", RunMode = RunMode.Async)]
         public async Task BackAsync()
         {
-            await Call(SkipTrack.PerformAsync);
+            await Call(BackTrack.PerformAsync);
         }
 
         private async Task Call(Func<ISocketMessageChannel, SpotifyWebAPI, Task> task)

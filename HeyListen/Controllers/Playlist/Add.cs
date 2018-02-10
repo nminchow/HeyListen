@@ -34,6 +34,9 @@ namespace HeyListen.Controllers.Playlist
 
         private static async Task SearchResults(ISocketMessageChannel channel, SpotifyWebAPI spotify, List<FullTrack> track, string id)
         {
+
+            track = track.OrderByDescending(f => f.Popularity).Take(4).ToList();
+
             await channel.SendMessageAsync(text: "Multiple Tracks Found - to add them, use the command at the bottom of each listing:");
 
             track.ForEach(async t => await channel.SendMessageAsync("", embed: Views.Spotify.Track.Response(t, true)));

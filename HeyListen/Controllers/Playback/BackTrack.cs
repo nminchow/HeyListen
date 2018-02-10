@@ -11,10 +11,12 @@ namespace HeyListen.Controllers.Playback
     {
         public static async System.Threading.Tasks.Task PerformAsync(ISocketMessageChannel channel, SpotifyWebAPI spotify)
         {
-            var playing = spotify.GetPlayingTrack();
-            await channel.SendMessageAsync(text: $"Skipping Back: {playing.Item.Name}");
-            var result = spotify.SkipPlaybackToPrevious();
-            await channel.SendMessageAsync(text: $"Now Playing: {spotify.GetPlayingTrack().Item.Name}");
+            await PlaybackBase.MessageBeforeAfter(channel, spotify, Skip);
+        }
+
+        private static void Skip(ISocketMessageChannel channel, SpotifyWebAPI spotify)
+        {
+            spotify.SkipPlaybackToPrevious();
         }
     }
 }

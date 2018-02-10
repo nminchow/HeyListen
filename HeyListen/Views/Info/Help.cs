@@ -17,7 +17,7 @@ namespace HeyListen.Views.Info
                 {
                     Name = "Guide"
                 },
-                ThumbnailUrl = "https://upload.wikimedia.org/wikipedia/en/0/04/Navi_%28The_Legend_of_Zelda%29.png",
+                ThumbnailUrl = "https://nminchow.github.io/HeyListenWeb/images/demo/heylogo.png",
                 Description = "'HeyListen!' is a bot that assists with discord's integrated spotify sharing.\n\n" +
                 "Prepend all commands with '!hey' - ex. ```!hey help```\n" +
                 "'HeyListen!' revolves around the concept of a `DJ`. Commands in the channel will control the spotify account of the DJ. In most cases, " +
@@ -33,9 +33,11 @@ namespace HeyListen.Views.Info
 
             embed.AddField("dj {user name}", "Sets the current dj to the supplied user." +
                 "\n`!hey dj navi`" +
-                "\nIf no user is supplied, sets the dj to the caller. Requires the caller be a channel modderator.");
-            embed.AddField("playlist", "If you are the dj, creates a playlist for you. Other players can then add tracks to this list.");
+                "\nIf no user is supplied, sets the DJ to the caller. Requires the caller be a channel modderator.");
+            embed.AddField("clear", "If you are the DJ, removes all channel control from your spotify playback.");
+            embed.AddField("playlist", "If you are the DJ, creates a playlist for you. Other players can then add tracks to this list.");
             embed.AddField("skip", "Skips the currently playing tack.");
+            embed.AddField("back", "Skips back a track.");
             embed.AddField("add {song name}", "If the current user has generated a playlist, adds a track to it. If multiple tracks are found, displays search results." +
                 "\n`!hey add Lost Woods`");
             embed.AddField("allow playback {true|false}", "Enables/disables non-dj playback skipping.");

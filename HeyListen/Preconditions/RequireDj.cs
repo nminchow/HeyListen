@@ -16,6 +16,8 @@ namespace HeyListen.Preconditions
             // possible to pass the context in?
             var db = (DataBase)services.GetService(typeof(DataBase));
             var currentDj = db.Channels.Include(c => c.CurrentDj).FirstOrDefault(c => c.DiscordId == context.Channel.Id.ToString())?.CurrentDj;
+            if (currentDj == null)
+                return PreconditionResult.FromError("No DJ has been set for this channel. Set one up with '!hey dj {username}'");
             if (currentDj.DiscordId == context.Message.Author.Id.ToString())
                 return PreconditionResult.FromSuccess();
             
