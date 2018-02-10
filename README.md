@@ -5,6 +5,8 @@ users of a Discord channel limited control of the current Spotify sharer's playb
 tracks to the current queue and skipping the playing tack. **HeyListen!** comes with a simple permissions
 system that allows the sharer to tune how the channel can interact with playback.
 
+[Official HeyListen! Discord](https://discord.gg/RdXVwZs)
+
 ## Built With
 
 * [Discord.net](https://github.com/RogueException/Discord.Net) - Bot Framework
