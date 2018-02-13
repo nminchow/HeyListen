@@ -20,7 +20,7 @@ namespace HeyListen.Controllers.Playback
             await task(channel, spotify);
         }
 
-        public static async Task MessageBeforeAfter(ISocketMessageChannel channel, SpotifyWebAPI spotify, Action<ISocketMessageChannel, SpotifyWebAPI> action)
+        public static async Task MessageBeforeAfter(ISocketMessageChannel channel, SpotifyWebAPI spotify, Func<ISocketMessageChannel, SpotifyWebAPI, bool> action)
         {
             var playing = spotify.GetPlayingTrack();
             if (playing.HasError() || string.IsNullOrEmpty(playing.Item?.Name))
@@ -29,7 +29,13 @@ namespace HeyListen.Controllers.Playback
                 return;
             }
             await channel.SendMessageAsync("Skipping:", embed: Views.Spotify.Track.Response(playing.Item));
-            action(channel, spotify);
+            var hasError = action(channel, spotify);
+            if (hasError)
+            {
+                await channel.SendMessageAsync("Error skipping track. This is most likely caused by being at the beginning/end of a playlist");
+                return;
+            }
+            
             var newTrack = spotify.GetPlayingTrack();
             if (newTrack.HasError() || string.IsNullOrEmpty(newTrack.Item?.Name))
             {

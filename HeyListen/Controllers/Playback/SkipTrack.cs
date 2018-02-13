@@ -14,9 +14,11 @@ namespace HeyListen.Controllers.Playback
             await PlaybackBase.MessageBeforeAfter(channel, spotify, Skip);
         }
 
-        private static void Skip(ISocketMessageChannel channel, SpotifyWebAPI spotify)
+        private static bool Skip(ISocketMessageChannel channel, SpotifyWebAPI spotify)
         {
-            spotify.SkipPlaybackToNext();
+            var result = spotify.SkipPlaybackToNext();
+
+            return result.HasError();
         }
     }
 }

@@ -6,7 +6,7 @@ using System;
 
 namespace HeyListen.Controllers.Admin
 {
-    static class SwithToPlaylist
+    static class SwithToNewPlaylist
     {
         public static async System.Threading.Tasks.Task PerformAsync(SocketUser user, ISocketMessageChannel channel, DataBase db, AdminOrchestrator config)
         {
@@ -25,11 +25,10 @@ namespace HeyListen.Controllers.Admin
             db.SaveChanges();
             spotify.AddPlaylistTrack(userId, playlist.Id, "spotify:track:0ldPfYO58u8zo9Mmj03z8n");
 
-            spotify.PausePlayback();
             //spotify.ResumePlayback(contextUri: playlist.Uri);
             spotify.SetRepeatMode(SpotifyAPI.Web.Enums.RepeatState.Off);
 
-            await channel.SendMessageAsync(text: $"Playlist created! This channel now has control of the following playlist: {playlist.ExternalUrls["spotify"]}");
+            await channel.SendMessageAsync(text: $"Playlist created! This channel can now add songs to the following playlist: {playlist.ExternalUrls["spotify"]}");
         }
     }
 }

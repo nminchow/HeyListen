@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace HeyListen.Modules
 {
-    [Group("hey")]
     [RequirePlaybackControl]
     public class Playback : ModuleBase<SocketCommandContext>
     {

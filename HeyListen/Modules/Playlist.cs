@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace HeyListen.Modules
 {
-    [Group("hey")]
     [RequirePlaylistControl]
     [RequirePlaylistSet]
     public class Playlist : ModuleBase<SocketCommandContext>

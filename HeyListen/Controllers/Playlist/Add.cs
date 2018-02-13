@@ -28,7 +28,12 @@ namespace HeyListen.Controllers.Playlist
 
         private static async Task AddTrack(ISocketMessageChannel channel, SpotifyWebAPI spotify, FullTrack track, User dj, string id)
         {
-            spotify.AddPlaylistTrack(id, dj.Playlist, track.Uri);
+            var addResult = spotify.AddPlaylistTrack(id, dj.Playlist, track.Uri);
+            if (addResult.HasError())
+            {
+                await channel.SendMessageAsync(text: "Error adding track. This playlist is most likely not editable by the current DJ.");
+                return;
+            }
             await channel.SendMessageAsync(text: $"Track Added: {track.Name}");
         }
 

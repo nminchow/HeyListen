@@ -36,6 +36,8 @@ namespace HeyListen.Views.Info
                 "\nIf no user is supplied, sets the DJ to the caller. Requires the caller be a channel modderator.");
             embed.AddField("clear", "If you are the DJ, removes all channel control from your spotify playback.");
             embed.AddField("playlist", "If you are the DJ, creates a playlist for you. Other players can then add tracks to this list.");
+            embed.AddField("playlist {playlist name}", "If you are the DJ, searches your current public playlists for the playlist name" +
+                " provided. If found, selects the playlist and allows other users to add tracks.");
             embed.AddField("skip", "Skips the currently playing tack.");
             embed.AddField("back", "Skips back a track.");
             embed.AddField("add {song name}", "If the current user has generated a playlist, adds a track to it. If multiple tracks are found, displays search results." +

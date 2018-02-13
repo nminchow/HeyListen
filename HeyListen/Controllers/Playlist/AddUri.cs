@@ -15,7 +15,13 @@ namespace HeyListen.Controllers.Playlist
         {
             var userId = spotify.GetPrivateProfile().Id;
 
-            spotify.AddPlaylistTrack(userId, dj.Playlist, uri);
+            var addResult = spotify.AddPlaylistTrack(userId, dj.Playlist, uri);
+            if (addResult.HasError())
+            {
+                await channel.SendMessageAsync(text: "Error adding track. This playlist is most likely not editable by the current DJ.");
+                return;
+            }
+            
             var track = spotify.GetTrack(uri.Split(':').Last());
 
             var current = spotify.GetPlayback();

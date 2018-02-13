@@ -9,7 +9,6 @@ using HeyListen.Controllers.Info;
 
 namespace HeyListen.Modules
 {
-    [Group("hey")]
     public class Info : ModuleBase<SocketCommandContext>
     {
 

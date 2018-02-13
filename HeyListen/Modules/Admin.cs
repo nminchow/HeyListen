@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace HeyListen.Modules
 {
-    [Group("hey")]
     public class Admin : ModuleBase<SocketCommandContext>
     {
         private DataBase _database;
@@ -40,11 +39,19 @@ namespace HeyListen.Modules
         }
 
         [Command("playlist")]
-        [Summary("Switch to playlist mode")]
+        [Summary("Switch to new playlist")]
         [RequireDj]
-        public async Task SwitchToPlaylist()
+        public async Task SwitchToNewPlaylist()
         {
-            await SwithToPlaylist.PerformAsync(Context.Message.Author, Context.Channel, _database, _adminOrchestator);
+            await SwithToNewPlaylist.PerformAsync(Context.Message.Author, Context.Channel, _database, _adminOrchestator);
+        }
+
+        [Command("playlist")]
+        [Summary("Switch to existing playlist")]
+        [RequireDj]
+        public async Task SwitchToExistingPlaylist([Remainder] string searchTerm)
+        {
+            await SwithToExistingPlaylist.PerformAsync(Context.Message.Author, Context.Channel, _database, _adminOrchestator, searchTerm);
         }
 
         [Command("token", RunMode = RunMode.Async)]
