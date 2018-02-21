@@ -20,7 +20,7 @@ namespace HeyListen.Preconditions
                 return PreconditionResult.FromError("No DJ has been set for this channel. Set one up with '!hey dj {username}'");
             if(dbUser.DiscordId == context.Message.Author.Id.ToString() || dbUser.AllowPlaylistControl)
                 return PreconditionResult.FromSuccess();
-            return PreconditionResult.FromError("Current DJ does not allow third party playlist control. In order to enable, dj must enter: '!hey playlist true'");
+            return PreconditionResult.FromError("Current DJ does not allow third party playlist control. In order to enable, dj must enter: '!hey allow playlist true'");
         }
     }
 }
