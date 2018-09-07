@@ -28,7 +28,7 @@ namespace HeyListen.Controllers.Admin
             //spotify.ResumePlayback(contextUri: playlist.Uri);
             spotify.SetRepeatMode(SpotifyAPI.Web.Enums.RepeatState.Off);
 
-            await channel.SendMessageAsync(text: $"Playlist created! This channel can now add songs to the following playlist: {playlist.ExternalUrls["spotify"]}");
+            await channel.SendMessageAsync(text: $"Playlist created! {PlaylistUrlHelper.GenerateUrl(playlist.Uri)}");
         }
     }
 }

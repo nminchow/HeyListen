@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SpotifyAPI.Web;
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HeyListen.Controllers.Playback
@@ -35,7 +36,7 @@ namespace HeyListen.Controllers.Playback
                 await channel.SendMessageAsync("Error skipping track. This is most likely caused by being at the beginning/end of a playlist");
                 return;
             }
-            
+            Thread.Sleep(100);
             var newTrack = spotify.GetPlayingTrack();
             if (newTrack.HasError() || string.IsNullOrEmpty(newTrack.Item?.Name))
             {
