@@ -18,7 +18,7 @@ namespace HeyListen.Views.Info
                     Name = "Guide"
                 },
                 ThumbnailUrl = "https://nminchow.github.io/HeyListenWeb/images/demo/heylogo.png",
-                Description = "'HeyListen!' is a bot that assists with discord's integrated spotify sharing.\n\n" +
+                Description = "'HeyListen!' is a bot that assists with [discord's integrated spotify sharing](https://support.discordapp.com/hc/en-us/articles/115003966072-Listening-Along-with-Spotify).\n\n" +
                 "Prepend all commands with '!hey' - ex. ```!hey help```\n" +
                 "'HeyListen!' revolves around the concept of a `DJ`. Commands in the channel will control the spotify account of the DJ. In most cases, " +
                 "you will want this to be the person who is doing the spotify sharing. This will allow other users in the channel to control " +
